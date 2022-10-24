@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.astro.apiwebService.entities.User;
 import com.astro.apiwebService.respositories.UserRepository;
+import com.astro.apiwebService.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -22,7 +23,7 @@ public class UserService {
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public User insert(User obj) {
