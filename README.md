@@ -1,4 +1,5 @@
-#  
+# APIRest Controle de pedidos 
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/DaveScott99/workshop-springboot-jpa/blob/master/LICENSE) 
 
 # Sobre o projeto
 
