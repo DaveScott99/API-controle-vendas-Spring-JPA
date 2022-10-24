@@ -14,8 +14,11 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/** 
+ * Entidade categoria para armazenar produtos.
+*/
 @Entity
-@Table(name = "tb_category")
+@Table(name = "tb_category") // Tabela que irá ser criada no banco de dados.
 public class Category implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -26,7 +29,7 @@ public class Category implements Serializable {
 	private String name;
 	
 	@JsonIgnore
-	@ManyToMany(mappedBy = "categories")
+	@ManyToMany(mappedBy = "categories") // Relação Muitos Para Muitos com a entidade Produto.
 	private Set<Product> products = new HashSet<>();
 	
 	public Category() {

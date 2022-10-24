@@ -13,12 +13,16 @@ import com.astro.apiwebService.entities.Category;
 import com.astro.apiwebService.services.CategoryService;
 
 @RestController
-@RequestMapping(value = "/categories")
+@RequestMapping(value = "/categories") // EndPoint para acessar todas as categorias.
 public class CategoryResource {
 	
-	@Autowired
+	@Autowired // Inversão de controle do Spring.
 	private CategoryService service;
 	
+	/**
+	 * Método para retornar uma lista de categorias cadastradas.
+	 * @return Uma lista de categorias.
+	 */
 	@GetMapping
 	public ResponseEntity<List<Category>> findAll(){
 		
@@ -27,7 +31,12 @@ public class CategoryResource {
 		return ResponseEntity.ok().body(list);
 		
 	}
-	
+
+	/**
+	 * Método para procurar uma categoria pelo seu id.
+	 * @param id que será procurado.
+	 * @return A categoria caso seja encontrada.
+	 */
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Category> findById(@PathVariable Long id){
 		

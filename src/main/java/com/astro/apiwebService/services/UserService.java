@@ -59,6 +59,11 @@ public class UserService {
 	
 	}
 
+	/**
+	 * Método auxiliar para a atualização dos dados.
+	 * @param entity cadastro que será atualizado.
+	 * @param obj com as informações que serão atualizadas no cadastro.
+	 */
 	private void updateData(User entity, User obj) {
 		entity.setName(obj.getName());
 		entity.setEmail(obj.getEmail());

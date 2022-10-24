@@ -10,8 +10,12 @@ import javax.persistence.Table;
 import com.astro.apiwebService.entities.pk.OrderItemPK;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * Entidade Item de Pedido.
+ */
+
 @Entity
-@Table(name = "tb_order_item")
+@Table(name = "tb_order_item") // Nome da tabela que será criada no banco de dados.
 public class OrderItem implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -65,6 +69,10 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 	
+	/**
+	 * Método para calcular o subtotal de cada item do pedido.
+	 * @return A multiplicação entre o preço e a quantidade do item.
+	 */
 	public Double getSubTotal() {
 		return price * quantity;
 	}

@@ -17,8 +17,12 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * Entidade Produto.
+ */
+
 @Entity
-@Table(name = "tb_product")
+@Table(name = "tb_product") // Nome da tabela que será criada no banco de dados.
 public class Product implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -31,11 +35,11 @@ public class Product implements Serializable{
 	private Double price;
 	private String imgUrl;
 	
-	@ManyToMany
+	@ManyToMany // Relação Muitos para Muitos com a entidade Categoria.
 	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<>();
 
-	@OneToMany(mappedBy = "id.product")
+	@OneToMany(mappedBy = "id.product") // Relação Um para Muitos com a entidade OrderItem.
 	private Set<OrderItem> items = new HashSet<>();
 	
 	public Product() {
@@ -93,6 +97,10 @@ public class Product implements Serializable{
 		return categories;
 	}
 	
+	/**
+	 * Método para criar uma lista de pedidos.
+	 * @return Uma lista de pedidos pronta.
+	 */
 	@JsonIgnore
 	public Set<Order> getOrders(){
 		

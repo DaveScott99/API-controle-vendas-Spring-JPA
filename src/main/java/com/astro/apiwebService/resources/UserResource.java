@@ -19,12 +19,16 @@ import com.astro.apiwebService.entities.User;
 import com.astro.apiwebService.services.UserService;
 
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/users") // EndPoint para acessar todos os usuários.
 public class UserResource {
 	
-	@Autowired
+	@Autowired // Inversão de controle do Spring.
 	private UserService service;
 	
+	/**
+	 * Método para retornar uma lista com todos os usuários cadastrados.
+	 * @return Os usuários cadastrados.
+	 */
 	@GetMapping
 	public ResponseEntity<List<User>> findAll(){
 		
@@ -34,6 +38,11 @@ public class UserResource {
 		
 	}
 	
+	/**
+	 * Método para buscar um usuário pelo seu id.
+	 * @param id que será procurado.
+	 * @return O usuário caso seja encontrado.
+	 */
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<User> findById(@PathVariable Long id){
 		
@@ -42,7 +51,12 @@ public class UserResource {
 		return ResponseEntity.ok().body(obj);
 		
 	}
-	
+
+	/**
+	 * Método para adicionar usuários ao banco de dados.
+	 * @param obj O objeto usuário com os dados que seram cadastrados.
+	 * @return O objeto completo postado no banco de dados.
+	 */
 	@PostMapping
 	public ResponseEntity<User> insert(@RequestBody User obj){
 		
@@ -54,6 +68,11 @@ public class UserResource {
 		return ResponseEntity.created(uri).body(obj);
 	}
 	
+	/**
+	 * Método para deletar um usuário a partir do seu id.
+	 * @param id do usuário que srá deletado.
+	 * @return Não será retornado nada.
+	 */
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		service.delete(id);
@@ -61,6 +80,12 @@ public class UserResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	/**
+	 * Método para atualizar o cadastro de um usuário.
+	 * @param id do cadastro que será atualizado.
+	 * @param obj formado com as informações que serão atualizadas.
+	 * @return Retorna o objeto atualizado.
+	 */
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj){
 		obj = service.update(id, obj);

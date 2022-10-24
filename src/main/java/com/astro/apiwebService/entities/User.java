@@ -14,6 +14,10 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * Entidade Usuário.
+ */
+
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
@@ -29,7 +33,7 @@ public class User implements Serializable {
 	private String password;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "client") // Relação Um para Muitos com a entidade Pedido.
 	private List<Order> orders = new ArrayList<>();
 	
 	public User() {

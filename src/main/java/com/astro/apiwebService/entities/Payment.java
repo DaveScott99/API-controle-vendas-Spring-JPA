@@ -14,8 +14,12 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * Entidade Pagamento.
+ */
+
 @Entity
-@Table(name = "tb_payment")
+@Table(name = "tb_payment") // Nome da tabela que será criada no banco de dados.
 public class Payment implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -26,8 +30,8 @@ public class Payment implements Serializable{
 	private Instant moment;
 	
 	@JsonIgnore
-	@OneToOne
-	@MapsId
+	@OneToOne // Relação Um para Muitos com a entidade Order.
+	@MapsId // Anotação para mapear a Primary Key por id.
 	private Order order;
 	
 	public Payment() {

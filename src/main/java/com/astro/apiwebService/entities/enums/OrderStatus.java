@@ -1,5 +1,8 @@
 package com.astro.apiwebService.entities.enums;
 
+/**
+ * Entidade enum para classificar o status da ordem de um pedido.
+ */
 public enum OrderStatus {
 	
 	WAITING_PAYMENT(1),
@@ -18,6 +21,11 @@ public enum OrderStatus {
 		return code;
 	}
 	
+	/**
+	 * Método para retornar o StatusCode de um pedido.
+	 * @param code Referente a um dos tipos enumerado.
+	 * @return O valor do StatusCode.
+	 */
 	public static OrderStatus valueOf(int code) {
 		
 		for (OrderStatus value : OrderStatus.values()) {

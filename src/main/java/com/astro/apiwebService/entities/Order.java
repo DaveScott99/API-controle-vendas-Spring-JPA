@@ -20,8 +20,12 @@ import javax.persistence.Table;
 import com.astro.apiwebService.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+/**
+ * Entidade Pedido.
+ */
+
 @Entity
-@Table(name = "tb_order")
+@Table(name = "tb_order") // Tabela que será criada no banco de dados.
 public class Order implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -30,19 +34,19 @@ public class Order implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT") // Formatação de data
 	private Instant moment;
 	
 	private Integer orderStatus;
 
-	@ManyToOne
-	@JoinColumn(name = "client_id")
+	@ManyToOne // Relação Muitos para Um com a entidade Cliente.
+	@JoinColumn(name = "client_id") // Pegando a Foreign Key(id do cliente) e juntando na tabela Order no banco de dados.
 	private User client;
 	
-	@OneToMany(mappedBy = "id.order")
+	@OneToMany(mappedBy = "id.order") // Relação Um para Muitos com a entidade Item de Pedido.
 	private Set<OrderItem> items = new HashSet<>();
 	
-	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL) // Relação Um para Um com a entidade Pagamento.
 	private Payment payment;
 	
 	public Order() {
@@ -103,6 +107,10 @@ public class Order implements Serializable {
 		return items;
 	}
 	
+	/**
+	 * Método para calcular o total da ordem do pedido.
+	 * @return O total geral da compra.
+	 */
 	public Double getTotal() {
 		
 		double sum = 0;

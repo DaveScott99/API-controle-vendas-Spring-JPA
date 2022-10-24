@@ -13,12 +13,16 @@ import com.astro.apiwebService.entities.Product;
 import com.astro.apiwebService.services.ProductService;
 
 @RestController
-@RequestMapping(value = "/products")
+@RequestMapping(value = "/products") // EndPoint para acessar todos os produtos cadastrados.
 public class ProductResource {
 	
-	@Autowired
+	@Autowired // Inversão de controle do Spring.
 	private ProductService service;
 	
+	/**
+	 * Método para retornar uma lista de produtos cadastrados.
+	 * @return Uma lista de produtos.
+	 */
 	@GetMapping
 	public ResponseEntity<List<Product>> findAll(){
 		
@@ -28,6 +32,11 @@ public class ProductResource {
 		
 	}
 	
+	/**
+	 * Método para procurar um produto pelo seu id.
+	 * @param id que será procurado.
+	 * @return A produto caso seja encontrada.
+	 */
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Product> findById(@PathVariable Long id){
 		
