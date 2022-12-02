@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.astro.apiwebService.entities.Order;
 import com.astro.apiwebService.services.OrderService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/orders") // EndPoint para acessar todas as ordens.
+@Api(tags = "Order Resource")
 public class OrderResource {
 	
 	@Autowired // Inversão de controle do Spring.
@@ -24,6 +28,7 @@ public class OrderResource {
 	 * @return Uma lista de ordens.
 	 */
 	@GetMapping
+	@ApiOperation("Find all Orders")
 	public ResponseEntity<List<Order>> findAll(){
 		
 		List<Order> list = service.findAll();
@@ -38,6 +43,7 @@ public class OrderResource {
 	 * @return A ordem caso seja encontrada.
 	 */
 	@GetMapping(value = "/{id}")
+	@ApiOperation("Find Order by ID")
 	public ResponseEntity<Order> findById(@PathVariable Long id){
 		
 		Order obj = service.findById(id);

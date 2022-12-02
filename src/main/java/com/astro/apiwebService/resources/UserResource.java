@@ -18,8 +18,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.astro.apiwebService.entities.User;
 import com.astro.apiwebService.services.UserService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/users") // EndPoint para acessar todos os usuários.
+@Api(tags = "User Resource")
 public class UserResource {
 	
 	@Autowired // Inversão de controle do Spring.
@@ -30,6 +34,7 @@ public class UserResource {
 	 * @return Os usuários cadastrados.
 	 */
 	@GetMapping
+	@ApiOperation("Find all Users")
 	public ResponseEntity<List<User>> findAll(){
 		
 		List<User> list = service.findAll();
@@ -44,6 +49,7 @@ public class UserResource {
 	 * @return O usuário caso seja encontrado.
 	 */
 	@GetMapping(value = "/{id}")
+	@ApiOperation("Find User by ID")
 	public ResponseEntity<User> findById(@PathVariable Long id){
 		
 		User obj = service.findById(id);
@@ -58,6 +64,7 @@ public class UserResource {
 	 * @return O objeto completo postado no banco de dados.
 	 */
 	@PostMapping
+	@ApiOperation("Add User")
 	public ResponseEntity<User> insert(@RequestBody User obj){
 		
 		obj = service.insert(obj);
@@ -74,6 +81,7 @@ public class UserResource {
 	 * @return Não será retornado nada.
 	 */
 	@DeleteMapping(value = "/{id}")
+	@ApiOperation("Delete User")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		service.delete(id);
 		
@@ -87,6 +95,7 @@ public class UserResource {
 	 * @return Retorna o objeto atualizado.
 	 */
 	@PutMapping(value = "/{id}")
+	@ApiOperation("Edit User")
 	public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User obj){
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);

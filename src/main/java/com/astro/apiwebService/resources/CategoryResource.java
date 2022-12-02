@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.astro.apiwebService.entities.Category;
 import com.astro.apiwebService.services.CategoryService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/categories") // EndPoint para acessar todas as categorias.
+@Api(tags = "Category Resource")
 public class CategoryResource {
 	
 	@Autowired // Inversão de controle do Spring.
@@ -24,6 +28,7 @@ public class CategoryResource {
 	 * @return Uma lista de categorias.
 	 */
 	@GetMapping
+	@ApiOperation("Find all Categoryes")
 	public ResponseEntity<List<Category>> findAll(){
 		
 		List<Category> list = service.findAll();
@@ -38,6 +43,7 @@ public class CategoryResource {
 	 * @return A categoria caso seja encontrada.
 	 */
 	@GetMapping(value = "/{id}")
+	@ApiOperation("Find Category by ID")
 	public ResponseEntity<Category> findById(@PathVariable Long id){
 		
 		Category obj = service.findById(id);
